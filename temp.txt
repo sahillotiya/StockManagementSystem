@@ -1,0 +1,67 @@
+<?php
+    ob_start();
+    session_start();
+    if(isset($_SESSION['u']) && isset($_SESSION['p']))
+    {
+        header("location:s_login_action.php");
+    }
+?>
+<form method="post" action="s_login.php">
+Enter username: <input type="text" name="uname" placeholder="enter username">
+<br><br>
+Enter password: <input type="text" name="pwd" placeholder="enter password">
+<br><br>
+<input type="submit" name="btn" value="Login">
+</form>
+
+<?php
+    if(isset($_POST['btn']))
+    {
+        $u=$_POST['uname'];
+        $p=$_POST['pwd'];
+        $au="ABHISHEK";
+        $ap="123@123";
+        if($u==$au && $p==$ap)
+        {
+            $_SESSION['u']=$u;
+            $_SESSION['p']=$p;
+            header("location:s_login_action.php");
+        }
+        else
+        {
+            echo "incorrect password or username";
+        }
+    }
+?>
+
+----------------------------------------------
+
+
+<?php
+    ob_start();
+    session_start();
+    if(isset($_SESSION['u'])&& isset($_SESSION['p']))
+    {
+        echo "welcome ".$_SESSION['u'];
+        ?>
+        <a href="s_logout.php"><br><br><input type="button" value="logout">
+            <?php
+    }
+    else
+    {
+        header("location:s_login.php");
+    }
+?>
+
+--------------------------------------------------
+
+
+
+<?php
+    ob_start();
+    session_start();
+    unset($_SESSION['u']);
+    unset($_SESSION['p']);
+    header("location:s_login.php");
+    session_destroy();
+?>
